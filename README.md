@@ -57,3 +57,33 @@ You can learn more in the
 [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Notes
+
+- Run cypress e2e testing `yarn cypress:run` or `yarn cypress:open`
+- App could run locally happily with MSW, when running `yarn start`, useful when api is down or if we only have a contract api.
+- Validation need more requirements :) some validation has been added when adding a Contact, but more could be done.
+- DOB needs validation and formatting. I would probably use date-fns.
+- Avatar editor would need a File Library to do it properly. At the moment the Avatar can be change only randomly when clicking edit button :)
+- Handling errors when calling API could be more friendly, for example show a message to the user when something is wrong. This approach is only done with one endpoint at the moment “getContacts”.
+- App is deployed here: http://contacts-marcelo.surge.sh/
+
+```
+{
+    "name": "Marcelo Barrera",
+    "email": "marcelodarmis@gmail.com",
+    "bio": "Seasoned, passionate and open-minded software developer with many years of commercial experience implementing full stack application systems.",
+    "hobbies": [ "Cycling", "Football", "Reading"],
+    "interests": [ "Clean code", "Scalability", "Reusability", "Testability", "Always learning new things"],
+    "humble": true,
+    "curious": true,
+    "easygoing": true,
+    "foosball_champion": true,
+    "adaptable": true,
+    "team_player": true,
+    "github_url": "https://github.com/MarceloBarrera",
+    "stack_overflow_url": "https://stackoverflow.com/users/2789024/darmis",
+    "linkedin_url": "https://www.linkedin.com/in/marcelobarrera/",
+    "hireable": null
+}
+```
