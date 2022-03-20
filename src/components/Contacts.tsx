@@ -1,12 +1,15 @@
-import { Container, Flex, Heading } from "@chakra-ui/react";
+import { Button, Container, Flex, Heading } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import { ContactsContext } from "../context/Context";
-import { ActionTypes, Status } from "../context/types";
+import { ActionTypes, ContactToAdd, Status } from "../context/types";
 import { CardList } from "./CardList";
-import { getContacts } from "../api/api";
+import { addContact, getContacts } from "../api/api";
+import { AddIcon } from "@chakra-ui/icons";
+import { ModalAddContact } from "./ModalAddContact";
 
 export const Contacts = () => {
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [status, setStatus] = useState<Status>(Status.LOADING);
 
   const { state, dispatch } = useContext(ContactsContext);
@@ -24,12 +27,39 @@ export const Contacts = () => {
     makeRequest();
   }, [dispatch]);
 
+  const addContactHandler = async (contactToAdd: ContactToAdd) => {
+    const contactAdded = await addContact(contactToAdd);
+    dispatch({ type: ActionTypes.ADD_CONTACT, payload: contactAdded });
+    setShowModal(false);
+  };
+
   return (
     <Container maxW="80%">
       <Flex alignItems="center" justifyContent="center">
         <Heading> My contacts list </Heading>
         <ColorModeSwitcher />
       </Flex>
+
+      <Button
+        onClick={() => setShowModal(true)}
+        variant={"solid"}
+        colorScheme={"teal"}
+        size={"sm"}
+        mr={4}
+        leftIcon={<AddIcon />}
+      >
+        Add Contact
+      </Button>
+      <ModalAddContact
+        isOpen={showModal}
+        onClose={() => {
+          setShowModal(false);
+        }}
+        onConfirm={(contact) => {
+          addContactHandler(contact);
+        }}
+      />
+
       {status === Status.LOADING ? (
         "Loading..."
       ) : status === Status.REJECTED ? (

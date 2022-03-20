@@ -8,7 +8,7 @@ const contact = {
   avatar: "https://i.pravatar.cc/300",
   email: "Chadd_MacGyver0@hotmail.com",
   phone: "(264) 221-8092 x4383",
-  birthday: new Date("2021-01-14T01:43:04.943Z"),
+  birthday: "2021-01-14T01:43:04.943Z",
   id: 1,
 };
 

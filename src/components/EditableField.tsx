@@ -66,6 +66,7 @@ export const EditableField = ({
       isPreviewFocusable={true}
       selectAllOnFocus={false}
       wordBreak="break-word"
+      submitOnBlur={false}
     >
       <EditablePreview />
 

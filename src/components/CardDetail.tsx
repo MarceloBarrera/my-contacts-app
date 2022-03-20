@@ -1,8 +1,10 @@
 import { Box, Button, ButtonGroup, VStack } from "@chakra-ui/react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { updateContact, deleteContact } from "../api/api";
 import { ContactsContext } from "../context/Context";
 import { ActionTypes, Contact } from "../context/types";
 import { EditableField } from "./EditableField";
+import { ModalConfirmation } from "./ModalConfirmation";
 
 export const CardDetail = ({
   contact,
@@ -12,31 +14,45 @@ export const CardDetail = ({
   setShowItemIdHandler: (id: number) => void;
 }) => {
   const { dispatch } = useContext(ContactsContext);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
-  const updateContactPhone = (phone: string) => {
+  const updateContactPhone = async (phone: string) => {
     dispatch({
       type: ActionTypes.UPDATE_CONTACT,
       payload: { ...contact, phone },
     });
+    await updateContact({ ...contact, phone });
   };
-  const updateContactEmail = (email: string) => {
+
+  const updateContactEmail = async (email: string) => {
     dispatch({
       type: ActionTypes.UPDATE_CONTACT,
       payload: { ...contact, email },
     });
+    await updateContact({ ...contact, email });
   };
-  const updateContactBirthday = (birthday: string) => {
+
+  const updateContactBirthday = async (birthday: string) => {
     dispatch({
       type: ActionTypes.UPDATE_CONTACT,
-      payload: { ...contact, birthday: new Date(birthday) },
+      payload: { ...contact, birthday },
     });
+    await updateContact({ ...contact, birthday });
+  };
+
+  const deleteContactHandler = async (id: number) => {
+    dispatch({
+      type: ActionTypes.DELETE_CONTACT,
+      payload: id,
+    });
+    await deleteContact(id);
   };
   return (
     <Box>
       <EditableField value={contact.email} updateHandler={updateContactEmail} />
       <EditableField value={contact.phone} updateHandler={updateContactPhone} />
       <EditableField
-        value={contact.birthday.toISOString().slice(0, 10)}
+        value={contact.birthday}
         updateHandler={updateContactBirthday}
       />
 
@@ -45,7 +61,7 @@ export const CardDetail = ({
           <Button
             colorScheme="red"
             onClick={() => {
-              console.log("delete");
+              setShowModal(true);
             }}
           >
             Delete
@@ -58,6 +74,16 @@ export const CardDetail = ({
             Close
           </Button>
         </ButtonGroup>
+        <ModalConfirmation
+          isOpen={showModal}
+          onClose={() => {
+            setShowModal(false);
+          }}
+          onConfirm={() => {
+            deleteContactHandler(contact.id);
+            setShowModal(false);
+          }}
+        />
       </VStack>
     </Box>
   );

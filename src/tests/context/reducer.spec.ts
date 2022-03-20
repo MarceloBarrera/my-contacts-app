@@ -28,7 +28,7 @@ const contact1 = {
   avatar: "https://i.pravatar.cc/300",
   email: "Chadd_MacGyver0@hotmail.com",
   phone: "(264) 221-8092 x4383",
-  birthday: new Date("2021-01-14T01:43:04.943Z"),
+  birthday: "2021-01-14T01:43:04.943Z",
   id: 1,
 };
 const contact2 = {
@@ -37,7 +37,7 @@ const contact2 = {
   avatar: "https://i.pravatar.cc/300",
   email: "Gretchen73@hotmail.com",
   phone: "1-811-658-9113",
-  birthday: new Date("2021-05-24T06:54:15.513Z"),
+  birthday: "2021-05-24T06:54:15.513Z",
   id: 2,
 };
 const initialState: State = {
@@ -72,4 +72,38 @@ it("should update contact when updated", () => {
     name: "foo bar",
   });
   expect(newState.contacts.length).toEqual(2);
+});
+
+it("should delete contact", () => {
+  const action: Action = {
+    type: ActionTypes.DELETE_CONTACT,
+    payload: 1,
+  };
+
+  const newState = reducer(initialState, action);
+
+  expect(newState.contacts[0]).toEqual(contact2);
+  expect(newState.contacts.length).toEqual(1);
+});
+
+it("should add contact", () => {
+  const contact3 = {
+    createdAt: new Date("2021-12-21T16:57:41.550Z"),
+    name: "Melody Jacobi",
+    avatar: "https://i.pravatar.cc/300",
+    email: "Gretchen73@hotmail.com",
+    phone: "1-811-658-9113",
+    birthday: "2021-05-24T06:54:15.513Z",
+    id: 3,
+  };
+
+  const action: Action = {
+    type: ActionTypes.ADD_CONTACT,
+    payload: contact3,
+  };
+
+  const newState = reducer(initialState, action);
+
+  expect(newState.contacts[2]).toEqual(contact3);
+  expect(newState.contacts.length).toEqual(3);
 });

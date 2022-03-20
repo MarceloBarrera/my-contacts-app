@@ -9,7 +9,6 @@ export const reducer = (state: State, action: Action): State => {
           return {
             ...contact,
             createdAt: new Date(contact.createdAt),
-            birthday: new Date(contact.birthday),
             id: parseInt(contact.id),
           };
         }),
@@ -26,6 +25,18 @@ export const reducer = (state: State, action: Action): State => {
           action.payload,
           ...state.contacts.slice(indexContact + 1),
         ],
+      };
+    }
+    case ActionTypes.DELETE_CONTACT: {
+      return {
+        ...state,
+        contacts: state.contacts.filter((c) => c.id !== action.payload),
+      };
+    }
+    case ActionTypes.ADD_CONTACT: {
+      return {
+        ...state,
+        contacts: [...state.contacts, action.payload],
       };
     }
     default:

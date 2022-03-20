@@ -10,6 +10,7 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { useContext } from "react";
+import { updateContact } from "../api/api";
 import { ContactsContext } from "../context/Context";
 import { ActionTypes, Contact } from "../context/types";
 import { generateRandomAvatar } from "../utils";
@@ -26,18 +27,21 @@ export const Card = ({
   showItemId: number;
 }) => {
   const { dispatch } = useContext(ContactsContext);
-  const updateContactName = (name: string) => {
+
+  const updateContactName = async (name: string) => {
     dispatch({
       type: ActionTypes.UPDATE_CONTACT,
       payload: { ...contact, name },
     });
+    await updateContact({ ...contact, name });
   };
 
-  const updateContactAvatar = (avatar: string) => {
+  const updateContactAvatar = async (avatar: string) => {
     dispatch({
       type: ActionTypes.UPDATE_CONTACT,
       payload: { ...contact, avatar },
     });
+    await updateContact({ ...contact, avatar });
   };
 
   const isEditMode = showItemId === contact.id;
@@ -57,7 +61,7 @@ export const Card = ({
             setShowItemIdHandler(contact.id);
           }}
         >
-          <Box bgColor="lightblue" h={"120px"} w={"full"} />
+          <Box bgColor="lightgray" h={"120px"} w={"full"} />
           <Flex justify={"center"} mt={-12}>
             <Avatar
               size={"xl"}
