@@ -27,7 +27,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:open": "start-server-and-test start 3000 'yarn cypress open'",
+    "cypress:run": "start-server-and-test start 3000 'yarn cypress run'"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -43,5 +45,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cypress": "^9.5.2",
+    "msw": "^0.39.2",
+    "start-server-and-test": "^1.14.0"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

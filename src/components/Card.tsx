@@ -77,7 +77,7 @@ export const Card = ({
                   onClick={() => {
                     updateContactAvatar(generateRandomAvatar());
                   }}
-                  aria-label="edit-avatar"
+                  aria-label={`edit-avatar-${contact.id}`}
                   size="sm"
                   icon={<EditIcon />}
                 />
@@ -92,6 +92,7 @@ export const Card = ({
                   <EditableField
                     value={contact.name}
                     updateHandler={updateContactName}
+                    id={`contact-name-id-${contact.id}`}
                   />
                 ) : (
                   contact.name

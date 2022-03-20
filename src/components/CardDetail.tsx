@@ -49,16 +49,26 @@ export const CardDetail = ({
   };
   return (
     <Box>
-      <EditableField value={contact.email} updateHandler={updateContactEmail} />
-      <EditableField value={contact.phone} updateHandler={updateContactPhone} />
+      <EditableField
+        value={contact.email}
+        updateHandler={updateContactEmail}
+        id={`contact-email-id-${contact.id}`}
+      />
+      <EditableField
+        value={contact.phone}
+        updateHandler={updateContactPhone}
+        id={`contact-phone-id-${contact.id}`}
+      />
       <EditableField
         value={contact.birthday}
         updateHandler={updateContactBirthday}
+        id={`contact-birthday-id-${contact.id}`}
       />
 
       <VStack direction={["column", "row"]}>
         <ButtonGroup variant="outline" spacing="6" mt="4">
           <Button
+            data-test={`delete-btn-contact-${contact.id}`}
             colorScheme="red"
             onClick={() => {
               setShowModal(true);

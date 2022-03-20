@@ -14,8 +14,10 @@ import { useState } from "react";
 export const EditableField = ({
   value,
   updateHandler,
+  id,
 }: {
   value: string;
+  id: string;
   updateHandler: (name: string) => void;
 }) => {
   const [text, setText] = useState<string>(value);
@@ -50,9 +52,9 @@ export const EditableField = ({
     ) : (
       <Flex justifyContent="center">
         <IconButton
-          aria-label="edit-field"
+          aria-label={`edit-button-${id}`}
           size="sm"
-          icon={<EditIcon />}
+          icon={<EditIcon data-test={`edit-icon-${id}`} />}
           {...getEditButtonProps()}
         />
       </Flex>
@@ -71,6 +73,7 @@ export const EditableField = ({
       <EditablePreview />
 
       <Input
+        data-test={`input-${id}`}
         py={2}
         px={4}
         as={EditableInput}

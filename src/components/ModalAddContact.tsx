@@ -73,6 +73,7 @@ export const ModalAddContact = ({
 
         <ModalFooter>
           <Button
+            data-test="add-contact-modal"
             colorScheme="teal"
             mr={3}
             onClick={() => {
@@ -85,10 +86,10 @@ export const ModalAddContact = ({
               });
             }}
           >
-            Yes
+            Add
           </Button>
           <Button variant="outline" onClick={onClose}>
-            No
+            Cancel
           </Button>
         </ModalFooter>
       </ModalContent>

@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { Contact, ContactApi, ContactToAdd } from "../context/types";
 
-const baseUrl = `https://61c32f169cfb8f0017a3e9f4.mockapi.io`;
+const baseUrl = process.env.REACT_APP_CONTACTS_API;
 export const getContacts = async (): Promise<ContactApi[]> => {
   return axios(`${baseUrl}/api/v1/contacts`, {
     method: "GET",
