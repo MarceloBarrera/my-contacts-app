@@ -66,6 +66,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 - DOB needs validation and formatting. I would probably use date-fns.
 - Avatar editor would need a File Library to do it properly. At the moment the Avatar can be change only randomly when clicking edit button :)
 - Handling errors when calling API could be more friendly, for example show a message to the user when something is wrong. This approach is only done with one endpoint at the moment “getContacts”.
+- Need more thoughts on performance.
 - App is deployed here: http://contacts-marcelo.surge.sh/
 
 ```
