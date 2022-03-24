@@ -15,6 +15,15 @@ export const handlers = [
           birthday: "2021-11-25T05:29:06.599Z",
           id: "35",
         },
+        {
+          createdAt: "2022-02-21T23:00:05.414Z",
+          name: "marce",
+          avatar: "https://i.pravatar.cc/300",
+          email: "marce@gmail.com",
+          phone: "1111111-784-2087 x469",
+          birthday: "2021-11-25T05:29:06.599Z",
+          id: "36",
+        },
       ])
     );
   }),
