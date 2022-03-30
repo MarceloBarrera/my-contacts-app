@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Contact } from "../context/types";
 import { EditableField } from "./EditableField";
 import { ModalConfirmation } from "./ModalConfirmation";
-import useUpdateContact from "./useUpdateContact";
+import useUpdateContact from "../context/useUpdateContact";
 
 export const CardDetail = ({
   contact,
@@ -12,7 +12,6 @@ export const CardDetail = ({
   contact: Contact;
   setShowItemIdHandler: (id: number) => void;
 }) => {
-  console.log("I render CardDetail");
   const { updateContactField, deleteContact } = useUpdateContact();
 
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -26,7 +25,7 @@ export const CardDetail = ({
       />
       <EditableField
         value={contact.phone}
-        updateHandler={(value) => updateContactField(contact, "contact", value)}
+        updateHandler={(value) => updateContactField(contact, "phone", value)}
         id={`contact-phone-id-${contact.id}`}
       />
       <EditableField

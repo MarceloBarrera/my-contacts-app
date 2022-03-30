@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { deleteContact as deleteContactApi, updateContact } from "../api/api";
-import { ContactsContext } from "../context/Context";
-import { ActionTypes, Contact } from "../context/types";
+import { ContactsContext } from "./Context";
+import { ActionTypes, Contact } from "./types";
 
 type updateContactDispatches = {
   updateContactField: (

@@ -9,10 +9,8 @@ import {
   useColorModeValue,
   IconButton,
 } from "@chakra-ui/react";
-import { useContext } from "react";
-import { updateContact } from "../api/api";
-import { ContactsContext } from "../context/Context";
-import { ActionTypes, Contact } from "../context/types";
+import { Contact } from "../context/types";
+import useUpdateContact from "../context/useUpdateContact";
 import { generateRandomAvatar } from "../utils";
 import { CardDetail } from "./CardDetail";
 import { EditableField } from "./EditableField";
@@ -26,23 +24,7 @@ export const Card = ({
   setShowItemIdHandler: (id: number) => void;
   showItemId: number;
 }) => {
-  const { dispatch } = useContext(ContactsContext);
-
-  const updateContactName = async (name: string) => {
-    dispatch({
-      type: ActionTypes.UPDATE_CONTACT,
-      payload: { ...contact, name },
-    });
-    await updateContact({ ...contact, name });
-  };
-
-  const updateContactAvatar = async (avatar: string) => {
-    dispatch({
-      type: ActionTypes.UPDATE_CONTACT,
-      payload: { ...contact, avatar },
-    });
-    await updateContact({ ...contact, avatar });
-  };
+  const { updateContactField } = useUpdateContact();
 
   const isEditMode = showItemId === contact.id;
 
@@ -75,7 +57,11 @@ export const Card = ({
               <>
                 <IconButton
                   onClick={() => {
-                    updateContactAvatar(generateRandomAvatar());
+                    updateContactField(
+                      contact,
+                      "avatar",
+                      generateRandomAvatar()
+                    );
                   }}
                   aria-label={`edit-avatar-${contact.id}`}
                   size="sm"
@@ -91,7 +77,9 @@ export const Card = ({
                 {isEditMode ? (
                   <EditableField
                     value={contact.name}
-                    updateHandler={updateContactName}
+                    updateHandler={(name: string) => {
+                      updateContactField(contact, "name", name);
+                    }}
                     id={`contact-name-id-${contact.id}`}
                   />
                 ) : (
