@@ -17,10 +17,10 @@ describe("Add contact modal", () => {
       <ModalAddContact isOpen={true} onClose={() => {}} onConfirm={() => {}} />
     );
 
-    const addButton = screen.getByRole("button", { name: /add/i });
     const inputTextName = screen.getByRole("textbox", { name: /name/i });
-
     userEvent.type(inputTextName, "bar");
+
+    const addButton = screen.getByRole("button", { name: /add/i });
     expect(addButton).not.toBeDisabled();
   });
 
@@ -31,8 +31,10 @@ describe("Add contact modal", () => {
 
     const addButton = screen.getByRole("button", { name: /add/i });
     userEvent.type(screen.getByRole("textbox", { name: /name/i }), "bar");
+
     const inputEmail = screen.getByRole("textbox", { name: /email address/i });
     userEvent.type(inputEmail, "badEmail");
+
     expect(addButton).toBeDisabled();
   });
 
@@ -43,9 +45,10 @@ describe("Add contact modal", () => {
 
     const addButton = screen.getByRole("button", { name: /add/i });
     userEvent.type(screen.getByRole("textbox", { name: /name/i }), "bar");
-    const inputEmail = screen.getByRole("textbox", { name: /email address/i });
 
+    const inputEmail = screen.getByRole("textbox", { name: /email address/i });
     userEvent.type(inputEmail, "bar@foo.com");
+
     expect(addButton).not.toBeDisabled();
   });
 });
