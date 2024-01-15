@@ -1,5 +1,8 @@
 import { rest } from "msw";
+import * as usersDB from "./data/users";
+
 const baseUrl = `https://bar.foo.com`;
+const authUrl = process.env.REACT_APP_AUTH_URL;
 
 export const handlers = [
   rest.get(`${baseUrl}/api/v1/contacts`, (req, res, ctx) => {
@@ -58,5 +61,27 @@ export const handlers = [
         createdAt: "2022-02-21T23:00:05.414Z",
       })
     );
+  }),
+
+  rest.post(`${authUrl}/login`, async (req, res, ctx) => {
+    const { username, password } = req.body;
+    const user = await usersDB.authenticate({ username, password });
+    return res(ctx.json({ user }));
+  }),
+
+  rest.post(`${authUrl}/register`, async (req, res, ctx) => {
+    const { username, password } = req.body;
+    const userFields = { username, password };
+    await usersDB.create(userFields);
+    let user;
+    try {
+      user = await usersDB.authenticate(userFields);
+    } catch (error) {
+      return res(
+        ctx.status(400),
+        ctx.json({ status: 400, message: error.message })
+      );
+    }
+    return res(ctx.json({ user }));
   }),
 ];

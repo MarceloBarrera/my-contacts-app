@@ -37,7 +37,6 @@ export const Contacts = () => {
     <Container maxW="80%">
       <Flex alignItems="center" justifyContent="center">
         <Heading> My contacts list </Heading>
-        <ColorModeSwitcher />
       </Flex>
 
       <Button
