@@ -1,5 +1,5 @@
 import { rest } from "msw";
-const baseUrl = `https://61c32f169cfb8f0017a3e9f4.mockapi.io`;
+const baseUrl = `https://bar.foo.com`;
 
 export const handlers = [
   rest.get(`${baseUrl}/api/v1/contacts`, (req, res, ctx) => {
