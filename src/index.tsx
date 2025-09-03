@@ -7,7 +7,8 @@ import * as serviceWorker from "./serviceWorker";
 
 if (
   process.env.NODE_ENV === "development" &&
-  (window as any).Cypress === undefined
+  (window as any).Cypress === undefined &&
+  process.env.REACT_APP_USE_MSW === "true"
 ) {
   const { worker } = require("./mocks/browser");
 

@@ -61,13 +61,13 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ## Notes
 
 - Run cypress e2e testing `yarn cypress:run` or `yarn cypress:open`
-- App could run locally happily with MSW, when running `yarn start`, useful when api is down or if we only have a contract api.
+- App could run locally happily with MSW, when running `yarn start:msw`, useful when api is down or if we only have a contract api.
 - Validation need more requirements :) some validation has been added when adding a Contact, but more could be done.
 - DOB needs validation and formatting. I would probably use date-fns.
 - Avatar editor would need a File Library to do it properly. At the moment the Avatar can be change only randomly when clicking edit button :)
 - Handling errors when calling API could be more friendly, for example show a message to the user when something is wrong. This approach is only done with one endpoint at the moment “getContacts”.
 - Need more thoughts on performance.
-- App is deployed here: http://contacts-marcelo.surge.sh/
+- App is deployed here: https://heroic-biscuit-8f40e8.netlify.app/
 
 ```
 {
